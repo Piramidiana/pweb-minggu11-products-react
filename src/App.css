@@ -273,3 +273,49 @@
   font-size: 12px;
   color: #64748b;
 }
+
+.btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.delete-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.modal-title-center,
+.modal-subtitle-center {
+  text-align: center;
+}
+
+.delete-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.delete-preview-name {
+  font-size: 18px;
+}
+
+.delete-preview-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
