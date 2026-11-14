@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import type { ProductInput } from '../types/product'
+import type { Product, ProductInput } from '../types/product'
 import Modal from './Modal'
 
 interface ProductFormModalProps {
+  product?: Product
   onSubmit: (input: ProductInput) => Promise<void>
   onClose: () => void
 }
@@ -30,9 +31,12 @@ function validate(name: string, price: string): FormErrors {
   return errors
 }
 
-function ProductFormModal({ onSubmit, onClose }: ProductFormModalProps) {
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
+function ProductFormModal({ product, onSubmit, onClose }: ProductFormModalProps) {
+  const isEdit = product !== undefined
+  const title = isEdit ? 'Edit Produk' : 'Tambah Produk'
+
+  const [name, setName] = useState(product?.name ?? '')
+  const [price, setPrice] = useState(product ? String(product.price) : '')
   const [errors, setErrors] = useState<FormErrors>({})
   const [serverError, setServerError] = useState('')
   const [saving, setSaving] = useState(false)
@@ -58,9 +62,12 @@ function ProductFormModal({ onSubmit, onClose }: ProductFormModalProps) {
   }
 
   return (
-    <Modal title="Tambah Produk" onClose={onClose}>
-      <h2 className="modal-title">Tambah Produk</h2>
-      <p className="modal-subtitle">Masukkan informasi produk baru.</p>
+    <Modal title={title} onClose={onClose}>
+      <h2 className="modal-title">{title}</h2>
+      <p className="modal-subtitle">
+        {isEdit ? 'Perbarui informasi produk yang dipilih.' : 'Masukkan informasi produk baru.'}
+      </p>
+      {product && <p className="modal-id">ID: {product.id}</p>}
 
       <form onSubmit={handleSubmit} noValidate>
         <div className="field">
@@ -98,7 +105,7 @@ function ProductFormModal({ onSubmit, onClose }: ProductFormModalProps) {
             Batal
           </button>
           <button className="btn btn-primary" type="submit" disabled={saving}>
-            {saving ? 'Menyimpan...' : 'Simpan Produk'}
+            {saving ? 'Menyimpan...' : isEdit ? 'Simpan Perubahan' : 'Simpan Produk'}
           </button>
         </div>
       </form>

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { createProduct, getProducts } from './api/products'
+import { createProduct, getProducts, updateProduct } from './api/products'
 import ProductFormModal from './components/ProductFormModal'
 import ProductList from './components/ProductList'
 import SearchBar from './components/SearchBar'
 import type { Product, ProductInput } from './types/product'
 import './App.css'
 
-type ModalState = { type: 'add' } | null
+type ModalState = { type: 'add' } | { type: 'edit'; product: Product } | null
 
 function App() {
   const [products, setProducts] = useState<Product[]>([])
@@ -37,6 +37,12 @@ function App() {
     closeModal()
   }
 
+  async function handleUpdate(id: number, input: ProductInput) {
+    const updated = await updateProduct(id, input)
+    setProducts((current) => current.map((product) => (product.id === id ? updated : product)))
+    closeModal()
+  }
+
   return (
     <main className="page">
       <header className="page-header">
@@ -61,6 +67,7 @@ function App() {
           <ProductList
             products={filteredProducts}
             emptyMessage={products.length === 0 ? 'Belum ada produk.' : 'Produk tidak ditemukan.'}
+            onEdit={(product) => setModal({ type: 'edit', product })}
           />
           <p className="footer-note">
             Menampilkan {filteredProducts.length} dari {products.length} produk
@@ -69,6 +76,13 @@ function App() {
       )}
 
       {modal?.type === 'add' && <ProductFormModal onSubmit={handleCreate} onClose={closeModal} />}
+      {modal?.type === 'edit' && (
+        <ProductFormModal
+          product={modal.product}
+          onSubmit={(input) => handleUpdate(modal.product.id, input)}
+          onClose={closeModal}
+        />
+      )}
     </main>
   )
 }
