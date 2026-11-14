@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getProducts } from './api/products'
 import ProductList from './components/ProductList'
+import SearchBar from './components/SearchBar'
 import type { Product } from './types/product'
 import './App.css'
 
@@ -8,6 +9,7 @@ function App() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
     getProducts()
@@ -15,6 +17,11 @@ function App() {
       .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false))
   }, [])
+
+  const keyword = query.trim().toLowerCase()
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(keyword),
+  )
 
   return (
     <main className="page">
@@ -33,10 +40,16 @@ function App() {
 
       {!loading && !error && (
         <>
-          <p className="count">{products.length} produk</p>
-          <ProductList products={products} />
+          <div className="toolbar">
+            <SearchBar value={query} onChange={setQuery} />
+            <span className="count">{products.length} produk</span>
+          </div>
+          <ProductList
+            products={filteredProducts}
+            emptyMessage={products.length === 0 ? 'Belum ada produk.' : 'Produk tidak ditemukan.'}
+          />
           <p className="footer-note">
-            Menampilkan {products.length} dari {products.length} produk
+            Menampilkan {filteredProducts.length} dari {products.length} produk
           </p>
         </>
       )}

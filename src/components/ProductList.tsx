@@ -3,13 +3,14 @@ import ProductCard from './ProductCard'
 
 interface ProductListProps {
   products: Product[]
+  emptyMessage: string
   onEdit?: (product: Product) => void
   onDelete?: (product: Product) => void
 }
 
-function ProductList({ products, onEdit, onDelete }: ProductListProps) {
+function ProductList({ products, emptyMessage, onEdit, onDelete }: ProductListProps) {
   if (products.length === 0) {
-    return <p className="state">Belum ada produk.</p>
+    return <p className="state">{emptyMessage}</p>
   }
 
   return (
