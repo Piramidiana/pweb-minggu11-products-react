@@ -1,4 +1,4 @@
-# Manajemen Produk (React)
+﻿# Manajemen Produk (React)
 
 Tugas 3 Pemrograman Web: antarmuka React untuk mengelola produk (lihat, cari, tambah, ubah, hapus) yang terhubung ke API CRUD produk dari Tugas 2.
 
@@ -88,15 +88,17 @@ Pengujian manual di browser dengan backend Tugas 2 yang terhubung ke database Ne
 
 | No | Skenario | Hasil yang Diharapkan | Hasil Aktual | Bukti |
 |---|---|---|---|---|
-| 1 | Membuka halaman | Semua produk dari database tampil sebagai kartu dengan harga berformat Rupiah | Sesuai | ![Daftar produk](docs/images/01-daftar-produk.png) |
-| 2 | Mengetik `pul` pada kolom cari | Hanya produk yang namanya mengandung "pul" tampil, footer menyesuaikan | Sesuai | ![Pencarian](docs/images/02-pencarian.png) |
-| 3 | Menyimpan form tambah dengan harga tidak valid | Pesan validasi muncul, data tidak dikirim | Sesuai | ![Validasi tambah](docs/images/03-validasi-tambah.png) |
-| 4 | Menyimpan form tambah dengan data valid | Pop-up tertutup, kartu produk baru muncul | Sesuai | ![Tambah sukses](docs/images/04-tambah-sukses.png) |
-| 5 | Menekan Edit pada sebuah produk | Pop-up terbuka dengan ID dan data produk terisi | Sesuai | ![Modal edit](docs/images/05-modal-edit.png) |
-| 6 | Menyimpan perubahan | Kartu produk menampilkan data terbaru | Sesuai | ![Edit sukses](docs/images/06-edit-sukses.png) |
-| 7 | Menekan Hapus pada sebuah produk | Pop-up konfirmasi menampilkan produk yang akan dihapus | Sesuai | ![Modal hapus](docs/images/07-modal-hapus.png) |
-| 8 | Mengonfirmasi hapus lalu memuat ulang halaman | Produk hilang dan tetap hilang setelah halaman dimuat ulang | Sesuai | ![Hapus sukses](docs/images/08-hapus-sukses.png) |
+| 1 | Membuka halaman | Semua produk dari database tampil sebagai kartu dengan harga berformat Rupiah | Sesuai | ![Daftar produk](images/pemwebm11-01-daftar-produk.png) |
+| 2 | Mengetik `pul` pada kolom cari | Hanya produk yang namanya mengandung "pul" tampil, footer menyesuaikan | Sesuai | ![Pencarian](images/pemwebm11-02-pencarian.png) |
+| 3 | Menyimpan form tambah dengan harga tidak valid | Pesan validasi muncul, data tidak dikirim | Sesuai | ![Validasi tambah](images/pemwebm11-03-validasi-tambah.png) |
+| 4 | Menyimpan form tambah dengan data valid | Pop-up tertutup, kartu produk baru muncul | Sesuai | ![Tambah sukses](images/pemwebm11-04-tambah-sukses.png) |
+| 5 | Menekan Edit pada sebuah produk | Pop-up terbuka dengan ID dan data produk terisi | Sesuai | ![Modal edit](images/pemwebm11-05-modal-edit.png) |
+| 6 | Menyimpan perubahan | Kartu produk menampilkan data terbaru | Sesuai | ![Edit sukses](images/pemwebm11-06-edit-sukses.png) |
+| 7 | Menekan Hapus pada sebuah produk | Pop-up konfirmasi menampilkan produk yang akan dihapus | Sesuai | ![Modal hapus](images/pemwebm11-07-modal-hapus.png) |
+| 8 | Mengonfirmasi hapus lalu memuat ulang halaman | Produk hilang dan tetap hilang setelah halaman dimuat ulang | Sesuai | ![Hapus sukses](images/pemwebm11-08-hapus-sukses.png) |
 
 ## Format Commit
 
 Commit mengikuti format `type(tugas-3): deskripsi` dan dibuat atomic, satu fitur untuk satu commit.
+
+
