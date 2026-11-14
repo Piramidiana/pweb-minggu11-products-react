@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react'
-import { createProduct, getProducts, updateProduct } from './api/products'
+import { createProduct, deleteProduct, getProducts, updateProduct } from './api/products'
+import ConfirmDeleteModal from './components/ConfirmDeleteModal'
 import ProductFormModal from './components/ProductFormModal'
 import ProductList from './components/ProductList'
 import SearchBar from './components/SearchBar'
 import type { Product, ProductInput } from './types/product'
 import './App.css'
 
-type ModalState = { type: 'add' } | { type: 'edit'; product: Product } | null
+type ModalState =
+  | { type: 'add' }
+  | { type: 'edit'; product: Product }
+  | { type: 'delete'; product: Product }
+  | null
 
 function App() {
   const [products, setProducts] = useState<Product[]>([])
@@ -43,6 +48,12 @@ function App() {
     closeModal()
   }
 
+  async function handleDelete(id: number) {
+    await deleteProduct(id)
+    setProducts((current) => current.filter((product) => product.id !== id))
+    closeModal()
+  }
+
   return (
     <main className="page">
       <header className="page-header">
@@ -68,6 +79,7 @@ function App() {
             products={filteredProducts}
             emptyMessage={products.length === 0 ? 'Belum ada produk.' : 'Produk tidak ditemukan.'}
             onEdit={(product) => setModal({ type: 'edit', product })}
+            onDelete={(product) => setModal({ type: 'delete', product })}
           />
           <p className="footer-note">
             Menampilkan {filteredProducts.length} dari {products.length} produk
@@ -80,6 +92,13 @@ function App() {
         <ProductFormModal
           product={modal.product}
           onSubmit={(input) => handleUpdate(modal.product.id, input)}
+          onClose={closeModal}
+        />
+      )}
+      {modal?.type === 'delete' && (
+        <ConfirmDeleteModal
+          product={modal.product}
+          onConfirm={() => handleDelete(modal.product.id)}
           onClose={closeModal}
         />
       )}
